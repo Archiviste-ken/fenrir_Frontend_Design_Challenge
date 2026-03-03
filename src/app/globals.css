@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* 1. Map CSS variables to Tailwind v4 utility classes */
+@theme {
+  --color-primary: var(--brand-primary);
+  
+  --color-background: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-border: var(--border-color);
+  --color-foreground: var(--text-main);
+  --color-muted: var(--text-muted);
+
+  --color-critical: var(--severity-critical);
+  --color-high: var(--severity-high);
+  --color-medium: var(--severity-medium);
+  --color-low: var(--severity-low);
+}
+
+/* 2. Define the actual values for Light and Dark modes */
+@layer base {
+  :root {
+    /* Fixed Colors */
+    --brand-primary: #0CC8A8;         /* Teal accent */
+    --severity-critical: #EF4444;     /* Red */
+    --severity-high: #F97316;         /* Orange */
+    --severity-medium: #F59E0B;       /* Amber/Yellow */
+    --severity-low: #22C55E;          /* Green */
+
+    /* Light Mode - Semantic Variables */
+    --bg-base: #F5F5F5;               /* Light background */
+    --bg-surface: #FFFFFF;            /* White for cards/forms */
+    --border-color: #E5E7EB;          
+    --text-main: #111827;
+    --text-muted: #6B7280;
+  }
+
+  .dark {
+    /* Dark Mode - Semantic Variables */
+    --bg-base: #0F0F0F;               /* Near-black background */
+    --bg-surface: #1A1A1A;            /* Elevated dark surface */
+    --border-color: #374151;          
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+  }
+}
+
+/* Apply default backgrounds and text colors */
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+}
