@@ -1,15 +1,18 @@
-import { ThemeProvider } from "@/components/ThemeProvider"
-import "./globals.css"
+import type { Metadata } from "next";
+import "./globals.css";
+import { ThemeProvider } from "@/context/ThemeContext";
+
+export const metadata: Metadata = {
+  title: "Fenrir Security Dashboard",
+  description: "Security vulnerability management dashboard",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // suppressHydrationWarning is required here to prevent SSR mismatch errors
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <body>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
