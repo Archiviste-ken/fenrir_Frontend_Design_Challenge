@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import AppLayout from "@/components/layout/AppLayout";
 import { getScanById } from "@/data/mockData";
 import type { SeverityLevel, StepStatus } from "@/types";
-import { redirect } from "next/navigation";
+
 
 const severityColor: Record<SeverityLevel, string> = {
   critical: "var(--severity-critical)",
@@ -287,6 +287,3 @@ export default function ScanDetailPage({ params }: { params: Promise<{ id: strin
   );
 }
 
-export default function ScansRedirect() {
-  redirect("/dashboard");
-}
