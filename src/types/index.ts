@@ -1,34 +1,70 @@
-export type Severity = 'Critical' | 'High' | 'Medium' | 'Low';
-export type ScanStatus = 'Completed' | 'Scheduled' | 'Failed'; // Status chips use distinct colors [cite: 51]
+/* filepath: c:\Users\Asus\OneDrive\Desktop\fenrir-dashboard\src\types\index.ts */
+export type SeverityLevel = "critical" | "high" | "medium" | "low" | "info";
 
-export interface VulnerabilityCounts {
-  critical: number;
-  high: number;
-  medium: number;
-  low: number;
+export type ScanStatus = "completed" | "running" | "failed" | "queued";
+
+export type StepStatus = "completed" | "running" | "pending" | "failed";
+
+export interface Finding {
+  id: string;
+  title: string;
+  severity: SeverityLevel;
+  category: string;
+  description: string;
+  location: string;
+  remediation: string;
+}
+
+export interface ScanTarget {
+  name: string;
+  type: string;
+  url?: string;
+}
+
+export interface ScanStep {
+  id: number;
+  label: string;
+  status: StepStatus;
+  timestamp?: string;
 }
 
 export interface Scan {
   id: string;
-  name: string;
-  type: string;
+  project: string;
+  target: ScanTarget;
+  scanner: string;
   status: ScanStatus;
+  severity: SeverityLevel;
+  findings: number;
+  criticalCount: number;
+  highCount: number;
+  mediumCount: number;
+  lowCount: number;
+  infoCount: number;
   progress: number;
-  vulnerabilities: VulnerabilityCounts;
-  lastScan: string; // e.g., "4d ago", "10 mins ago"
+  startedAt: string;
+  completedAt?: string;
+  duration: string;
+  steps: ScanStep[];
+  findingsList: Finding[];
+  consoleLogs: string[];
 }
 
-export interface LogEntry {
-  timestamp: string; // e.g., "[09:08:00]"
-  message: string;
-  type: 'recon' | 'testing' | 'success' | 'warning';
+export interface DashboardStats {
+  totalScans: number;
+  activeProjects: number;
+  totalFindings: number;
+  criticalFindings: number;
+  highFindings: number;
+  mediumFindings: number;
+  lowFindings: number;
+  overallScore: number;
 }
 
-export interface Finding {
-  id: string;
-  severity: Severity;
-  title: string;
-  path: string; // Endpoint path in teal [cite: 58]
-  timestamp: string;
-  description: string;
+export interface SeverityCardData {
+  label: string;
+  count: number;
+  severity: SeverityLevel;
+  trend?: "up" | "down" | "stable";
+  trendValue?: number;
 }
